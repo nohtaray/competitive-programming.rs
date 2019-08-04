@@ -1,3 +1,5 @@
+use std::thread;
+
 /// ローカル環境なら _in.txt から入力を受ける
 fn read_input() -> String {
     use std::fs::File;
@@ -14,5 +16,15 @@ fn read_input() -> String {
 }
 
 fn main() {
-    //
+    thread::Builder::new()
+        .stack_size(32 * 1024 * 1024) // 32MB
+        .spawn(run)
+        .unwrap()
+        .join()
+        .unwrap();
+}
+
+fn run() {
+    let input = read_input();
+    let mut input = input.split_whitespace();
 }
