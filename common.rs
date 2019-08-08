@@ -2,13 +2,6 @@ use std::fs::File;
 use std::io::{stdout, BufWriter, Read, Write};
 use std::thread;
 
-fn run() {
-    let out = stdout();
-    let mut out = BufWriter::new(out.lock());
-    let input = read_input();
-    let mut input = input.split_whitespace();
-}
-
 fn main() {
     thread::Builder::new()
         .stack_size(32 * 1024 * 1024) // 32MB
@@ -30,4 +23,11 @@ fn read_input() -> String {
         None => stdin.lock().read_to_string(&mut s).unwrap(),
     };
     s
+}
+
+fn run() {
+    let out = stdout();
+    let mut out = BufWriter::new(out.lock());
+    let input = read_input();
+    let mut input = input.split_whitespace();
 }
